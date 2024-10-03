@@ -4,6 +4,8 @@ import { Component, Host, Prop, h, State } from '@stencil/core';
  * A loan calculator component.
  * @slot heading - Can be used to inject heading content on top of the calculator.
  * @slot examples - Can be used to inject examples content on the left side of the calculator.
+ * @slot monthly-payment-header - Can be used to inject header content above the monthly payment.
+ * @slot monthly-payment-disclaimer - Can be used to inject disclaimer content below the monthly payment.
  * @slot monthly-payment-footer - Can be used to inject footer content below the monthly payment.
  * @slot footnote - Can be used to inject footnote content below the calculator.
  * */
@@ -31,10 +33,14 @@ export class NvqLoanCalculator {
   /** The AmortizationPeriod label. */
   @Prop() amortizationPeriodLabel?: string = "Amortization Period";
 
-  /** The monthly payment label. */
+  /** The monthly payment label.
+   * @deprecated Use the slot monthly-payment-header instead.
+   * */
   @Prop() monthlyPaymentLabel?: string = "Monthly Payment";
 
-  /** The monthly payment footnote. */
+  /** The monthly payment footnote. 
+   * @deprecated Use the slot monthly-payment-disclaimer instead.
+   * */
   @Prop() monthlyPaymentDisclaimer?: string = "estimated payment";
   
   @State() totalAmount: number;
@@ -227,9 +233,17 @@ export class NvqLoanCalculator {
           </div>
         </div>
         <div class="result">
-          <h4 class="text-center">{this.monthlyPaymentLabel}<sup>‡</sup></h4>
+          <h4 class="text-center">
+            <slot name="monthly-payment-header">
+              {this.monthlyPaymentLabel}<sup>‡</sup>
+            </slot>
+          </h4>
           <span class="output">${this.calculatePayment()}</span>
-          <p class="disclaimer"><sup>‡</sup>{this.monthlyPaymentDisclaimer}</p>
+          <p class="disclaimer">
+            <slot name="monthly-payment-disclaimer">
+              <sup>‡</sup>{this.monthlyPaymentDisclaimer}
+            </slot>
+          </p>
           <slot name="monthly-payment-footer"></slot>
         </div>
       </div>
