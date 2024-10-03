@@ -25,7 +25,8 @@ using static Nuke.Common.Tools.Npm.NpmTasks;
   GitHubActionsImage.UbuntuLatest,
   OnPullRequestBranches = new[] { "main", "develop", "release/*" },
   InvokedTargets = new[] { nameof(Compile) },
-  FetchDepth = 0
+  FetchDepth = 0,
+  CacheKeyFiles = new string[] {}
   )]
 [GitHubActions(
     "Deploy",
@@ -33,7 +34,8 @@ using static Nuke.Common.Tools.Npm.NpmTasks;
     ImportSecrets = new[] { nameof(GitHubToken), "GITHUB_TOKEN", nameof(NpmToken), "NPM_TOKEN" },
     OnPushBranches = new[] { "main", "release/*" },
     InvokedTargets = new[] { nameof(Deploy) },
-    FetchDepth = 0
+    FetchDepth = 0,
+    CacheKeyFiles = new string[] {}
 )]
 class Build : NukeBuild
 {
