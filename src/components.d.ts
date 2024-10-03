@@ -32,10 +32,12 @@ export namespace Components {
         "interestRateLabel"?: string;
         /**
           * The monthly payment footnote.
+          * @deprecated Use the slot monthly-payment-disclaimer instead.
          */
         "monthlyPaymentDisclaimer"?: string;
         /**
           * The monthly payment label.
+          * @deprecated Use the slot monthly-payment-header instead.
          */
         "monthlyPaymentLabel"?: string;
         /**
@@ -85,10 +87,12 @@ declare namespace LocalJSX {
         "interestRateLabel"?: string;
         /**
           * The monthly payment footnote.
+          * @deprecated Use the slot monthly-payment-disclaimer instead.
          */
         "monthlyPaymentDisclaimer"?: string;
         /**
           * The monthly payment label.
+          * @deprecated Use the slot monthly-payment-header instead.
          */
         "monthlyPaymentLabel"?: string;
         /**
